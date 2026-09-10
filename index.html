@@ -1235,26 +1235,138 @@
     /* Additional Custom CSS */
     header {
       height: 74px;
-      background: transparent;
+      background: rgba(247, 250, 249, 0);
       backdrop-filter: blur(12px);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 99;
       border-bottom: 1px solid transparent;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
     header.scrolled {
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(255, 255, 255, 0.97);
       border-bottom: 1px solid rgba(11, 23, 34, .07);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+    }
+
+    header .nav-brand {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      margin-right: 50px;
+    }
+
+    header .nav-brand a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header .nav-brand img {
+      height: 44px;
+    }
+
+    header .nav-brand span {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0b1722;
+    }
+
+    header .nav-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    header .nav-center a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #48575f;
+      text-decoration: none;
+      position: relative;
+    }
+
+    header .nav-center a:hover {
+      color: #0b1722;
+    }
+
+    header .nav-center a.active-link {
+      color: #0b1722;
+    }
+
+    header .nav-center .result-dot::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #e84040;
+    }
+
+    header .nav-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 40px;
+    }
+
+    header .nav-right .btn-outline {
+      border: 1.5px solid #13b9a8;
+      color: #13b9a8;
+      background: transparent;
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 650;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    header .nav-right .btn-outline:hover {
+      background: rgba(19, 185, 168, 0.08);
+    }
+
+    header .nav-right .btn-solid {
+      background: #13b9a8;
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 650;
+      text-decoration: none;
+      border: 1.5px solid #13b9a8;
+      transition: background 0.2s;
+    }
+
+    header .nav-right .btn-solid:hover {
+      background: #0da496;
+    }
+
     .logo-marquee {
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
+
     .logo-marquee::before,
     .logo-marquee::after {
       content: "";
@@ -1265,28 +1377,34 @@
       z-index: 2;
       pointer-events: none;
     }
+
     .logo-marquee::before {
       left: 0;
       background: linear-gradient(90deg, #f7faf9, rgba(247, 250, 249, 0));
     }
+
     .logo-marquee::after {
       right: 0;
       background: linear-gradient(270deg, #f7faf9, rgba(247, 250, 249, 0));
     }
+
     .logo-track-wrap {
       overflow: hidden;
       margin: 0 5%;
     }
+
     .logo-track {
       display: flex;
       width: max-content;
       gap: 14px;
       animation: marquee-left 34s linear infinite;
     }
+
     .logo-track.reverse {
       animation-name: marquee-right;
       animation-duration: 38s;
     }
+
     .logo-card {
       flex: 0 0 auto;
       width: 188px;
@@ -1299,6 +1417,7 @@
       padding: 16px 20px;
       box-shadow: 0 10px 28px rgba(8, 26, 39, .06);
     }
+
     .logo-card img {
       max-width: 100%;
       max-height: 58px;
@@ -1306,102 +1425,228 @@
       height: auto;
       object-fit: contain;
     }
+
     @keyframes marquee-left {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    @keyframes marquee-right {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-    #results {
-      padding: 110px 0 90px;
-      position: relative;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(14, 164, 152, 0.28) 0%, rgba(14, 164, 152, 0.08) 35%, transparent 65%),
-        linear-gradient(rgba(8, 12, 20, 0.88), rgba(8, 12, 20, 0.94)),
-        url('/reviews-bg.jpg') center/cover no-repeat;
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
     }
 
-    /* Footer Custom CSS */
-    .site-footer {
-      background: #080c14;
-      color: #fff;
-      padding: 80px 0 40px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      gap: 40px;
-    }
-    @media (max-width: 900px) {
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
+    @keyframes marquee-right {
+      from {
+        transform: translateX(-50%);
+      }
+
+      to {
+        transform: translateX(0);
       }
     }
-    @media (max-width: 600px) {
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
+
+    #results {
+      padding: 70px 0 60px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 100%, rgba(130, 50, 220, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 0%, rgba(14, 164, 152, 0.22) 0%, transparent 55%),
+        linear-gradient(160deg, rgba(8, 12, 20, 0.90) 0%, rgba(8, 12, 20, 0.97) 100%),
+        url('/reviews-bg.jpg') center/cover no-repeat;
+      background-attachment: scroll;
+      background-size: auto, auto, auto, cover;
     }
-    .site-footer a {
-      color: #a8b8c4;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 12px;
-      font-size: 14px;
+
+    #results::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140, 55, 230, 0.30) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
     }
-    .site-footer a:hover {
-      color: #fff;
+
+    #results>* {
+      position: relative;
+      z-index: 1;
     }
-    .site-footer h3 {
-      font-size: 16px;
-      margin-bottom: 20px;
-      color: #fff;
+
+    /* Minimal Footer Custom CSS */
+    .minimal-footer {
+      background: #070a0f;
+      padding: 50px 5% 0;
+      color: #72828d;
+      font-family: monospace;
+      font-size: 11px;
+      overflow: hidden;
     }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 60px;
-      padding-top: 30px;
-    }
-    .footer-bottom-shell {
+
+    .minimal-footer .footer-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 14px;
-      color: #a8b8c4;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .social-row {
+
+    .minimal-footer .social-icons {
       display: flex;
-      gap: 16px;
-      margin-top: 20px;
+      gap: 20px;
+    }
+
+    .minimal-footer .social-icons a {
+      color: #72828d;
+      text-decoration: none;
+    }
+
+    .minimal-footer .social-icons a:hover {
+      color: white;
+    }
+
+    .minimal-footer .social-icons svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .minimal-footer .center-text {
+      flex: 1;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .minimal-footer .right-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .minimal-footer .right-links a {
+      color: #72828d;
+      text-decoration: none;
+    }
+
+    .minimal-footer .right-links a:hover {
+      color: white;
+    }
+
+    .minimal-footer .huge-text {
+      text-align: center;
+      font-size: clamp(60px, 11.5vw, 180px);
+      font-weight: 900;
+      line-height: 0.82;
+      margin-top: 36px;
+      white-space: nowrap;
+      letter-spacing: -0.055em;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .minimal-footer .huge-text .commerce {
+      color: #111820;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+      text-shadow: 0 0 80px rgba(20, 185, 168, 0.12);
+    }
+
+    .minimal-footer .huge-text .kind {
+      color: #a361e2;
+      text-shadow: 0 0 60px rgba(163, 97, 226, 0.55), 0 0 120px rgba(163, 97, 226, 0.25);
+    }
+
+    .floating-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-dots .dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: float-dot 25s infinite alternate ease-in-out;
+    }
+
+    .floating-dots .dot.purple {
+      background: #a361e2;
+      box-shadow: 0 0 8px #a361e2;
+    }
+
+    .floating-dots .dot.green {
+      background: #14b9a8;
+      box-shadow: 0 0 8px #14b9a8;
+    }
+
+    @keyframes float-dot {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.2;
+      }
+
+      33% {
+        transform: translate(60px, -70px) scale(1.5);
+        opacity: 0.8;
+      }
+
+      66% {
+        transform: translate(-40px, 60px) scale(0.8);
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translate(30px, 30px) scale(1.2);
+        opacity: 0.9;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-      <div class="brand">
-        <a href="/" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
-          <img src="/src/assets/website-logo.png" alt="CommerceKind" style="height: 48px;">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="/">
+          <img src="/src/assets/website-logo.png" alt="CommerceKind">
+          <span>CommerceKind</span>
         </a>
       </div>
-      <nav style="display: flex; align-items: center; gap: 24px;">
-        <a href="#services" style="font-weight: 600; color: #40505a;">Services</a>
-        <a href="#agencies" style="font-weight: 600; color: #40505a;">For Agencies</a>
-        <a href="#results" style="font-weight: 600; color: #40505a;">Results</a>
-        <a href="#about" style="font-weight: 600; color: #40505a;">About</a>
-        <a href="#contact" style="font-weight: 600; color: #40505a;">Contact</a>
-        <a class="btn ghost" href="#" style="border: 1px solid #13b9a8; color: #13b9a8; padding: 10px 20px; border-radius: 999px;">Book a Call</a>
-        <a class="btn primary" href="#" style="background: #13b9a8; color: white; padding: 10px 20px; border-radius: 999px;">Free Audit</a>
+      <nav class="nav-center">
+        <a href="#services">Services</a>
+        <a href="#agencies">For Agencies</a>
+        <a href="#results" class="result-dot">Results</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <div class="nav-right">
+        <a class="btn-outline" href="#contact">Book a Call</a>
+        <a class="btn-solid" href="#contact">Free Audit &rarr;</a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-glow"></div>
     <div class="hero-glow-purple"></div>
+    <div class="floating-dots">
+      <div class="dot purple" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
+      <div class="dot green" style="top: 75%; left: 15%; animation-delay: 1.5s;"></div>
+      <div class="dot purple" style="top: 45%; left: 85%; animation-delay: 3s;"></div>
+      <div class="dot green" style="top: 85%; left: 75%; animation-delay: 0.8s;"></div>
+      <div class="dot purple" style="top: 10%; left: 60%; animation-delay: 2.2s;"></div>
+      <div class="dot green" style="top: 50%; left: 35%; animation-delay: 4.1s;"></div>
+      <div class="dot purple" style="top: 90%; left: 45%; animation-delay: 1.2s;"></div>
+      <div class="dot green" style="top: 30%; left: 80%; animation-delay: 2.5s;"></div>
+      <div class="dot purple" style="top: 65%; left: 5%; animation-delay: 3.8s;"></div>
+      <div class="dot green" style="top: 25%; left: 90%; animation-delay: 0.4s;"></div>
+      <div class="dot purple" style="top: 55%; left: 55%; animation-delay: 1.9s;"></div>
+      <div class="dot green" style="top: 80%; left: 25%; animation-delay: 4.5s;"></div>
+    </div>
     <div class="mark-bg">
       <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width=".55">
         <rect x="160" y="160" width="80" height="80" transform="rotate(45 200 200)"></rect>
@@ -1412,7 +1657,7 @@
       </svg>
     </div>
     <div class="veil"></div>
-    
+
     <div class="hero-container">
       <div class="hero-content">
         <div class="eyebrow">Ecommerce growth, with ownership</div>
@@ -1422,24 +1667,31 @@
           <a class="btn primary" href="#">Get a Growth Audit</a>
           <a class="btn secondary" href="#">For Agency Partners</a>
         </div>
-        
+
         <div class="cred-badges-row">
           <div class="cred-card">
-            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
             </svg>
             <div class="badge-title">Trustpilot 5/5</div>
             <div class="badge-subtitle">CUSTOMER RATED</div>
           </div>
           <div class="cred-card">
-            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
             </svg>
             <div class="badge-title">Top Rated Agency</div>
             <div class="badge-subtitle">FLORIDA 2024</div>
           </div>
           <div class="cred-card">
-            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
@@ -1447,7 +1699,8 @@
             <div class="badge-subtitle">AMAZON VERIFIED</div>
           </div>
           <div class="cred-card">
-            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
               <path d="M22 4L12 14.01l-3-3"></path>
             </svg>
@@ -1461,8 +1714,10 @@
 
   <div class="logos" style="padding: 60px 0; background: #f7faf9;">
     <div class="container">
-      <div class="logos-title" style="text-align: center; font-size: 14px; font-weight: 700; color: #72828d; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 30px;">Trusted by brands we help grow</div>
-      
+      <div class="logos-title"
+        style="text-align: center; font-size: 14px; font-weight: 700; color: #72828d; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 30px;">
+        Trusted by brands we help grow</div>
+
       <div class="logo-marquee">
         <!-- Row 1 -->
         <div class="logo-track-wrap">
@@ -1473,7 +1728,7 @@
             <div class="logo-card"><img src="/assets/image-3.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-4.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-5.png" alt="Brand"></div>
-            
+
             <div class="logo-card"><img src="/assets/image.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-2.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-3.png" alt="Brand"></div>
@@ -1481,7 +1736,7 @@
             <div class="logo-card"><img src="/assets/image-5.png" alt="Brand"></div>
           </div>
         </div>
-        
+
         <!-- Row 2 (Reverse) -->
         <div class="logo-track-wrap">
           <div class="logo-track reverse">
@@ -1491,7 +1746,7 @@
             <div class="logo-card"><img src="/assets/image-8.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-9.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image.png" alt="Brand"></div>
-            
+
             <div class="logo-card"><img src="/assets/image-6.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-7.png" alt="Brand"></div>
             <div class="logo-card"><img src="/assets/image-8.png" alt="Brand"></div>
@@ -1500,7 +1755,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -1539,7 +1794,9 @@
           accounts.</p>
       </div>
       <div class="office-video">
-        <video id="office-vid" src="/assets/office.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; border-radius: 20px;"></video>
+        <video id="office-vid" src="/assets/office.mp4" autoplay loop muted playsinline
+          style="width:100%; height:100%; object-fit:cover; border-radius: 20px;"></video>
+
       </div>
     </div>
   </section>
@@ -1705,10 +1962,7 @@
     </div>
   </section>
 
-  <footer>
-    <div class="container">CommerceKind • Homepage concept • Replace placeholders with approved client assets and
-      verified metrics before production.</div>
-  </footer>
+
 
   <script>
     const cases = [
@@ -1719,7 +1973,7 @@
     const tabs = [...document.querySelectorAll(".case-tab")], metric = document.getElementById("metric"), copy = document.getElementById("metricCopy"), img = document.getElementById("sellerImg");
     tabs.forEach((t, i) => t.addEventListener("click", () => { tabs.forEach(x => x.classList.remove("active")); t.classList.add("active"); metric.textContent = cases[i].metric; copy.innerHTML = cases[i].copy; img.src = cases[i].img; }));
     document.querySelectorAll(".faq-q").forEach(q => q.addEventListener("click", () => { const item = q.closest(".faq-item"), open = item.classList.contains("open"); document.querySelectorAll(".faq-item").forEach(x => x.classList.remove("open")); if (!open) item.classList.add("open"); }));
-    
+
     // Header scroll logic
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
@@ -1737,71 +1991,50 @@
   <script src="/src/casesData.js"></script>
 
   <!-- Extracted Footer HTML from Footer.jsx -->
-  <footer class="site-footer" id="contact">
-    <div class="container footer-grid">
-
-      <div>
-        <a class="logo" href="/" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
-          <img src="/src/assets/website-logo.png" alt="CommerceKind logo" loading="lazy" decoding="async" style="height: 38px; margin-right: 12px; filter: brightness(0) invert(1);" />
-          <span style="font-size: 20px; font-weight: 800;">CommerceKind</span>
+  <!-- Minimal Footer -->
+  <footer class="minimal-footer" id="contact">
+    <div class="footer-top">
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/company/commercekindllc/" aria-label="LinkedIn" target="_blank"
+          rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
         </a>
-        <p style="margin-top: 14px; font-weight: 600; color: #a8b8c4;">Where Results Are the Reason</p>
-        <p class="footer-tagline-sub" style="margin-top: 8px; font-size: 13px; color: #72828d;">Full-service Amazon growth for brands and agencies. US-based, Florida.</p>
-        <div class="social-row">
-          <a href="https://www.linkedin.com/company/commercekindllc/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-          </a>
-          <a href="https://www.instagram.com/commercekindllc/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" /></svg>
-          </a>
-          <a href="https://www.facebook.com/CommercekindLLC" aria-label="Facebook" target="_blank" rel="noopener noreferrer" class="social-icon-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
-          </a>
-        </div>
+        <a href="https://www.instagram.com/commercekindllc/" aria-label="Instagram" target="_blank"
+          rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+          </svg>
+        </a>
+        <a href="mailto:hello@commercekind.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <a href="#" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
       </div>
-
-      <div>
-        <h3>Services</h3>
-        <a href="#services">All Services</a>
-        <a href="#brand-growth">Brand Growth</a>
-        <a href="#ppc">PPC &amp; Advertising</a>
-        <a href="#listing-optimization">Listing Optimization</a>
+      <div class="center-text">
+        ©
+        <script>document.write(new Date().getFullYear())</script> CommerceKind. All rights reserved.
       </div>
-
-      <div>
-        <h3>Company</h3>
-        <a href="#about">About Us</a>
-        <a href="#results">Results &amp; Case Studies</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
+      <div class="right-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
       </div>
-
-      <div>
-        <h3>For Agencies</h3>
-        <a href="#for-agencies">Agency Overview</a>
-        <a href="#agency-partnership">Partnership Program</a>
-        <a href="#free-audit">Free Audit</a>
-      </div>
-
-      <div>
-        <h3>Get in Touch</h3>
-        <a href="mailto:hello@commercekind.com">hello@commercekind.com</a>
-        <a href="#contact" class="footer-cta-link" style="color: #13b9a8; font-weight: 700; margin-top: 12px;">Book a Free Call →</a>
-        <a href="#free-audit" class="footer-cta-link" style="color: #13b9a8; font-weight: 700;">Free Amazon Audit →</a>
-      </div>
-
     </div>
-    <div class="footer-bottom">
-      <div class="container footer-bottom-shell">
-        <div class="footer-copyright">
-          © <script>document.write(new Date().getFullYear())</script> CommerceKind · Florida, USA
-        </div>
-        <div class="footer-links" style="display: flex; gap: 16px;">
-          <a href="#privacy">Privacy Policy</a>
-          <span class="footer-sep"></span>
-          <a href="#terms">Terms of Service</a>
-        </div>
-      </div>
+    <div class="huge-text">
+      <span class="commerce">Commerce</span><span class="kind">Kind</span>
     </div>
   </footer>
 
