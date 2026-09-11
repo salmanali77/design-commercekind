@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import logo from '../../assets/website-logo.png'
+import logo from '../assets/website-logo.png'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
