@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw Video Files
+src/assets/Commercekind Testimonial 1.mp4
+src/assets/Testimonial 2.mov
+src/assets/VID_20240703_212335.mp4
+public/videos/testimonial-2.mov
+public/videos/testimonial-3-opt.mp4
+

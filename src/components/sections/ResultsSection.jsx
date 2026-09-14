@@ -1,57 +1,52 @@
 import { useState } from 'react'
-import casesData from '../../casesData'
-
-const cases = [
-  { metric: '+20%', copy: 'Sales growth', bold: 'Profit +36%', label: '01 Growth' },
-  { metric: '-41%', copy: 'Lower ACoS', bold: 'ROAS +58%', label: '02 Efficiency' },
-  { metric: '+114%', copy: 'Organic rank uplift', bold: 'Revenue 2.1×', label: '03 Momentum' },
-]
+import cases from '../../casesData'
+import { resultsData } from '../../data/resultsData'
 
 export default function ResultsSection() {
   const [activeCase, setActiveCase] = useState(0)
-  const current = cases[activeCase]
+  const { eyebrow, headline, headlineLine2, lead } = resultsData
+  const current = cases[activeCase] || cases[0]
 
-  // Try to get case image from casesData, fallback to placeholder
-  const caseImage = casesData?.[activeCase]?.img || null
+  const tabs = [
+    { label: '01 Growth', i: 0 },
+    { label: '02 Efficiency', i: 1 },
+    { label: '03 Momentum', i: 2 },
+  ]
 
   return (
     <section className="dark gridbg" id="results">
       <div className="container">
         <div className="results-head">
           <div>
-            <div className="eyebrow">Proof, not promises</div>
-            <h2>Real Accounts.<br />Real Growth.</h2>
+            <div className="eyebrow">{eyebrow}</div>
+            <h2>{headline}<br />{headlineLine2}</h2>
           </div>
-          <p className="lead">No vanity metrics. See what actually changed.</p>
+          <p className="lead">{lead}</p>
         </div>
         <div className="result-box">
-          <div className="result-info">
-            <div className="metric-badge">
-              LIVE RESULTS
-            </div>
-            <div className="metric">{current.metric}</div>
-            <div className="metric-copy">{current.copy}<br /><b>{current.bold}</b></div>
+          <div>
+            <div className="metric" id="metric">{current.metric}</div>
+            <div
+              className="metric-copy"
+              id="metricCopy"
+              dangerouslySetInnerHTML={{ __html: current.copy }}
+            />
             <div className="case-tabs">
-              {cases.map((c, i) => (
+              {tabs.map(tab => (
                 <button
-                  key={i}
-                  className={`case-tab${i === activeCase ? ' active' : ''}`}
-                  onClick={() => setActiveCase(i)}
+                  key={tab.i}
+                  className={`case-tab${activeCase === tab.i ? ' active' : ''}`}
+                  data-i={tab.i}
+                  onClick={() => setActiveCase(tab.i)}
                 >
-                  {c.label}
+                  {tab.label}
                 </button>
               ))}
             </div>
           </div>
           <div className="seller">
-            {caseImage ? (
-              <img src={caseImage} alt="Case study screenshot" />
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#65d6c9', fontSize: '14px', fontWeight: 700 }}>
-                Amazon Seller Central Dashboard
-              </div>
-            )}
-            <span className="source">Source: Amazon Seller Central</span>
+            <img id="sellerImg" src={current.img} alt="Seller Central" />
+            <span className="source">Amazon Seller Central</span>
           </div>
         </div>
       </div>

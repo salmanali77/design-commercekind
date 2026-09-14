@@ -1,28 +1,37 @@
+import { useEffect, useRef } from 'react'
+import { officeData } from '../../data/officeData'
+
 export default function OfficeSection() {
+  const { eyebrow, headline, description, videoSrc } = officeData
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.5
+    }
+  }, [])
+
   return (
-    <section id="about">
+    <section id="team">
       <div className="container office-grid">
         <div>
-          <div className="eyebrow">Who we are</div>
-          <h2>Built for Brands That Want More.</h2>
-          <p className="lead" style={{ marginTop: '16px' }}>
-            CommerceKind is a full-service marketplace growth agency.
-            We combine advertising, content, catalog optimization, and strategic execution
-            into a single team that takes real ownership of your business.
+          <div className="eyebrow">{eyebrow}</div>
+          <h2>{headline}</h2>
+          <p className="lead" style={{ marginTop: '18px', maxWidth: '480px' }}>
+            {description}
           </p>
         </div>
         <div className="office-video">
-          <video autoPlay muted loop playsInline>
-            <source src="/assets/office.mp4" type="video/mp4" />
-          </video>
-          <div className="office-inner">
-            <div className="play">▶</div>
-          </div>
-          <div className="office-tags">
-            <span>US-Based</span>
-            <span>Florida</span>
-            <span>Full-Service</span>
-          </div>
+          <video
+            ref={videoRef}
+            id="office-vid"
+            src={videoSrc || '/assets/office.mp4'}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
+          />
         </div>
       </div>
     </section>

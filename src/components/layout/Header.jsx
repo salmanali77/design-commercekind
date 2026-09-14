@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
-import logo from '../assets/website-logo.png'
+import { useEffect, useState, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { servicesList } from '../../data/servicesData'
+import logo from '../../assets/website-logo.png'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const location = useLocation()
+  const timeoutRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -12,77 +18,178 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // lock body scroll while the mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
+    setMobileOpen(false)
+    setServicesOpen(false)
+    setMobileServicesOpen(false)
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
-  const close = () => setOpen(false)
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
+  const close = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setMobileOpen(false)
+    setServicesOpen(false)
+    setMobileServicesOpen(false)
+  }
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setServicesOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setServicesOpen(false)
+    }, 200)
+  }
+
+  const half = Math.ceil(servicesList.length / 2)
+  const leftCol = servicesList.slice(0, half)
+  const rightCol = servicesList.slice(half)
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'} ${open ? 'bg-white shadow-md py-3' : ''}`}>
-      <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16 flex justify-between items-center">
-        <div className="flex-shrink-0 flex items-center ml-[30px]">
-          <a href="/" onClick={close} className="flex items-center gap-2">
-            <img src={logo} alt="CommerceKind logo" className="h-8 w-auto" />
-            <span className={`font-bold text-xl tracking-tight ${scrolled || open ? 'text-gray-900' : 'text-white'}`}>CommerceKind</span>
-          </a>
+    <header className={scrolled ? 'scrolled' : ''}>
+      <div className="container">
+        <div className="nav-brand">
+          <Link to="/" onClick={close}>
+            <img src={logo} alt="CommerceKind" />
+            <span>Commerce<b>Kind</b></span>
+          </Link>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-8" aria-label="Primary">
-          <a href="#services" onClick={close} className={`text-sm font-medium hover:text-teal-500 transition-colors ${scrolled ? 'text-gray-600' : 'text-gray-200'}`}>Services</a>
-          <a href="#agencies" onClick={close} className={`text-sm font-medium hover:text-teal-500 transition-colors ${scrolled ? 'text-gray-600' : 'text-gray-200'}`}>For Agencies</a>
-          <a href="#results" onClick={close} className={`text-sm font-medium hover:text-teal-500 transition-colors ${scrolled ? 'text-gray-600' : 'text-gray-200'}`}>Results</a>
-          <a href="#about" onClick={close} className={`text-sm font-medium hover:text-teal-500 transition-colors ${scrolled ? 'text-gray-600' : 'text-gray-200'}`}>About</a>
-          <a href="#contact" onClick={close} className={`text-sm font-medium hover:text-teal-500 transition-colors ${scrolled ? 'text-gray-600' : 'text-gray-200'}`}>Contact</a>
+        <nav className="nav-center">
+          {/* Services with hover mega menu */}
+          <div
+            className={`services-nav-wrapper${servicesOpen ? ' is-open' : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <a href="#services" className="services-nav-link" onClick={() => setServicesOpen(v => !v)}>
+              Services
+            </a>
+
+            <div
+              className="services-mega-menu"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="services-mega-card">
+                <div className="services-mega-grid">
+                  <div className="services-col">
+                    {leftCol.map(s => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.id}`}
+                        className="services-mega-item"
+                        onClick={close}
+                      >
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="services-col">
+                    {rightCol.map(s => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.id}`}
+                        className="services-mega-item"
+                        onClick={close}
+                      >
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#agencies">For Agencies</a>
+          <a href="#results">Results</a>
+          <a href="#team">About</a>
+          <a href="#contact">Contact</a>
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center space-x-4 mr-[50px]">
-          <a className={`text-sm font-medium border rounded-full px-5 py-2.5 transition-colors ${scrolled ? 'border-gray-300 text-gray-700 hover:bg-gray-50' : 'border-gray-400 text-white hover:bg-white hover:text-gray-900'}`} href="#contact" onClick={close}>Book a Call</a>
-          <a className="text-sm font-medium bg-teal-500 text-white rounded-full px-6 py-2.5 hover:bg-teal-600 transition-colors flex items-center gap-1" href="#free-audit" onClick={close}>
-            Free Audit <span aria-hidden="true">&rarr;</span>
-          </a>
+        <div className="nav-right">
+          <a className="btn-outline" href="#contact">Book a Call</a>
+          <a className="btn-solid" href="#contact">Free Audit &rarr;</a>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden items-center">
-          <button
-            className={`p-2 rounded-md ${scrolled || open ? 'text-gray-800' : 'text-white'}`}
-            type="button"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            onClick={() => setOpen(v => !v)}
-          >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {open ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
+        {/* Mobile hamburger */}
+        <button
+          className="mobile-hamburger"
+          style={{
+            display: 'none',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '8px',
+          }}
+          onClick={() => setMobileOpen(v => !v)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        >
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl py-4 px-6 flex flex-col gap-4 border-t border-gray-100 h-screen">
-          <a href="#services" onClick={close} className="text-gray-800 font-medium text-lg block py-3 border-b border-gray-100">Services</a>
-          <a href="#agencies" onClick={close} className="text-gray-800 font-medium text-lg block py-3 border-b border-gray-100">For Agencies</a>
-          <a href="#results" onClick={close} className="text-gray-800 font-medium text-lg block py-3 border-b border-gray-100">Results</a>
-          <a href="#about" onClick={close} className="text-gray-800 font-medium text-lg block py-3 border-b border-gray-100">About</a>
-          <a href="#contact" onClick={close} className="text-gray-800 font-medium text-lg block py-3 border-b border-gray-100">Contact</a>
-          <div className="flex flex-col gap-3 mt-4">
-            <a className="text-center font-medium border border-gray-300 text-gray-800 rounded-full px-4 py-3" href="#contact" onClick={close}>Book a Call</a>
-            <a className="text-center font-medium bg-teal-500 text-white rounded-full px-4 py-3" href="#free-audit" onClick={close}>
-              Free Audit &rarr;
-            </a>
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          width: '100%',
+          background: '#fff',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+          padding: '16px 24px 120px',
+          zIndex: 50,
+          maxHeight: '100vh',
+          overflowY: 'auto',
+        }}>
+          <button
+            onClick={() => setMobileServicesOpen(v => !v)}
+            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', fontSize: '17px', fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', color: '#0b1722', textAlign: 'left' }}
+          >
+            Services
+          </button>
+          {mobileServicesOpen && (
+            <div style={{ paddingLeft: '14px', borderLeft: '2px solid var(--teal)', display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px', marginBottom: '10px' }}>
+              {servicesList.map(s => (
+                <Link key={s.id} to={`/services/${s.id}`} onClick={close} style={{ fontSize: '14px', fontWeight: 650, color: '#48575f', padding: '6px 0', textDecoration: 'none' }}>
+                  {s.title}
+                </Link>
+              ))}
+            </div>
+          )}
+          <a href="#agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</a>
+          <a href="#results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</a>
+          <a href="#team" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</a>
+          <a href="#contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</a>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '28px' }}>
+            <a className="btn-outline" href="#contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Book a Call</a>
+            <a className="btn-solid" href="#contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Free Audit &rarr;</a>
           </div>
         </div>
       )}
+
+      <style>{`
+        @media (max-width: 900px) {
+          .nav-center, .nav-right { display: none !important; }
+          .mobile-hamburger { display: block !important; }
+        }
+      `}</style>
     </header>
   )
 }
