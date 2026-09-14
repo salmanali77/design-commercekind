@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { officeData } from '../../data/officeData'
 
 export default function OfficeSection() {
-  const { eyebrow, headline, description, videoSrc } = officeData
+  const { eyebrow, headline, description, videoSrc, poster } = officeData
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -25,11 +25,13 @@ export default function OfficeSection() {
           <video
             ref={videoRef}
             id="office-vid"
-            src={videoSrc || '/assets/office.mp4'}
+            src={videoSrc || '/videos/office.mp4'}
+            poster={poster || '/videos/office-poster.jpg'}
             autoPlay
             loop
             muted
             playsInline
+            preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
           />
         </div>

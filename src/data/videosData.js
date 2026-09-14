@@ -8,6 +8,7 @@ export const videosData = {
       title: 'Client Video Testimonial',
       role: 'Brand owner',
       src: '/videos/testimonial-1.mp4',
+      poster: '/videos/testimonial-1-poster.jpg',
       isBig: true,
     },
     {
@@ -16,6 +17,7 @@ export const videosData = {
       title: 'Client Video',
       role: 'Agency partner',
       src: '/videos/testimonial-2.mp4',
+      poster: '/videos/testimonial-2-poster.jpg',
       isBig: false,
     },
     {
@@ -24,6 +26,7 @@ export const videosData = {
       title: 'Client Video',
       role: 'Brand owner',
       src: '/videos/testimonial-3.mp4',
+      poster: '/videos/testimonial-3-poster.jpg',
       isBig: false,
     },
   ],

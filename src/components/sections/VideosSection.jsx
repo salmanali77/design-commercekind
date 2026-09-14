@@ -7,14 +7,30 @@ function VideoCard({ video }) {
   const videoRef = useRef(null)
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true
-      videoRef.current.play().then(() => {
-        setIsPlaying(true)
-      }).catch(err => {
-        console.warn('Autoplay error:', err)
-      })
-    }
+    const vid = videoRef.current
+    if (!vid) return
+
+    vid.muted = true
+    // Immediate play attempt
+    vid.play().then(() => setIsPlaying(true)).catch(() => {})
+
+    // Pause when offscreen, resume when onscreen to save network & CPU
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            vid.play().then(() => setIsPlaying(true)).catch(() => {})
+          } else {
+            vid.pause()
+            setIsPlaying(false)
+          }
+        })
+      },
+      { rootMargin: '200px', threshold: 0.05 }
+    )
+
+    observer.observe(vid)
+    return () => observer.disconnect()
   }, [])
 
   const handleCardClick = () => {
@@ -52,15 +68,16 @@ function VideoCard({ video }) {
         minHeight: video.isBig ? '490px' : '280px',
       }}
     >
-      {/* Video element continuously playing with full face alignment */}
+      {/* Video element continuously playing with full face alignment and instant poster */}
       <video
         ref={videoRef}
         src={video.src}
+        poster={video.poster}
         autoPlay
         loop
         muted={isMuted}
         playsInline
-        preload="metadata"
+        preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         style={{
