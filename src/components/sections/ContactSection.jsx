@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './contact.css'
 
 const STEP_TITLES = ['Who are you?', 'Your business', 'What you need']
 

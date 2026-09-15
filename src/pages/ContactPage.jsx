@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import ContactSection from '../components/sections/ContactSection'
+import '../components/sections/contact.css'
 
 export default function ContactPage() {
   useEffect(() => {

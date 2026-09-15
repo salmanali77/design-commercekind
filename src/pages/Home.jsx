@@ -9,7 +9,6 @@ import TrustSection from '../components/sections/TrustSection'
 import ProcessSection from '../components/sections/ProcessSection'
 import FaqSection from '../components/sections/FaqSection'
 import ClosingSection from '../components/sections/ClosingSection'
-import ContactSection from '../components/sections/ContactSection'
 
 export default function Home() {
   return (
@@ -25,10 +24,8 @@ export default function Home() {
       <ProcessSection />
       <FaqSection />
       <ClosingSection />
-      <div id="contact">
-        <ContactSection isEmbedded={true} />
-      </div>
     </>
   )
 }
+
 
