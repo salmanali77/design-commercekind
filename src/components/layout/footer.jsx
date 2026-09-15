@@ -28,7 +28,7 @@ export default function Footer() {
   const { socialLinks, links, brandName, brandHighlight, copyright } = footerData
 
   return (
-    <footer className="minimal-footer" id="contact">
+    <footer className="minimal-footer" id="site-footer">
       <div className="footer-top">
         <div className="social-icons">
           {socialLinks.map((link, i) => {

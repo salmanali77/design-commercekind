@@ -109,15 +109,15 @@ export default function Header() {
             </div>
           </div>
 
-          <a href="#agencies">For Agencies</a>
-          <a href="#results">Results</a>
-          <a href="#team">About</a>
-          <a href="#contact">Contact</a>
+          <a href="/#agencies">For Agencies</a>
+          <a href="/#results">Results</a>
+          <a href="/#team">About</a>
+          <Link to="/contact">Contact</Link>
         </nav>
 
         <div className="nav-right">
-          <a className="btn-outline" href="#contact">Book a Call</a>
-          <a className="btn-solid" href="#contact">Free Audit &rarr;</a>
+          <Link className="btn-outline" to="/contact">Book a Call</Link>
+          <Link className="btn-solid" to="/contact">Free Audit &rarr;</Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -172,14 +172,14 @@ export default function Header() {
               ))}
             </div>
           )}
-          <a href="#agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</a>
-          <a href="#results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</a>
-          <a href="#team" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</a>
-          <a href="#contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</a>
+          <a href="/#agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</a>
+          <a href="/#results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</a>
+          <a href="/#team" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</a>
+          <Link to="/contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</Link>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '28px' }}>
-            <a className="btn-outline" href="#contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Book a Call</a>
-            <a className="btn-solid" href="#contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Free Audit &rarr;</a>
+            <Link className="btn-outline" to="/contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Book a Call</Link>
+            <Link className="btn-solid" to="/contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Free Audit &rarr;</Link>
           </div>
         </div>
       )}
