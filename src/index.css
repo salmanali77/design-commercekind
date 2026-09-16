@@ -132,11 +132,11 @@ h3 {
 
 header {
   height: 74px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.96);
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgba(11, 23, 34, 0.08);
 }
 
 header .container {
@@ -1289,24 +1289,24 @@ footer {
 
 header {
   height: 74px;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 9999;
-  border-bottom: 1px solid transparent !important;
-  box-shadow: none !important;
+  border-bottom: 1px solid rgba(11, 23, 34, 0.08) !important;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.04) !important;
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.97) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border-bottom: 1px solid rgba(11, 23, 34, .08) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(11, 23, 34, .09) !important;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
 }
 
