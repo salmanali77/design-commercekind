@@ -29,6 +29,7 @@ export default function ServicePage({ forcedServiceId }) {
       <section className="service-hero-section">
         <div className="service-hero-glow"></div>
         <div className="service-hero-glow-teal"></div>
+
         <div className="container relative z-10 text-center">
 
           <h1 className="service-hero-title">
