@@ -3,10 +3,9 @@ import { videosData } from '../../data/videosData'
 
 function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
   const [isMuted, setIsMuted] = useState(true)
-  const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef(null)
 
-  // Respond immediately when isActive changes (hover or click)
+  // Play ONLY when mouse is on this video (isActive === true), otherwise pause immediately
   useEffect(() => {
     const vid = videoRef.current
     if (!vid) return
@@ -15,20 +14,17 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
       vid.muted = isMuted
       const playPromise = vid.play()
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch(() => {
-            // If browser blocks unmuted play, fallback to muted play
-            if (!vid.muted) {
-              vid.muted = true
-              setIsMuted(true)
-              vid.play().then(() => setIsPlaying(true)).catch(() => {})
-            }
-          })
+        playPromise.catch(() => {
+          // If browser blocks unmuted play, fallback to muted
+          if (!vid.muted) {
+            vid.muted = true
+            setIsMuted(true)
+            vid.play().catch(() => {})
+          }
+        })
       }
     } else {
       vid.pause()
-      setIsPlaying(false)
     }
   }, [isActive, isMuted])
 
@@ -46,7 +42,7 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
 
   return (
     <div
-      className={`vcard${video.isBig ? ' big' : ''}${isActive ? ' is-active' : ''}`}
+      className={`vcard${video.isBig ? ' big' : ''}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
@@ -56,13 +52,11 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
         overflow: 'hidden',
         background: '#071723',
         minHeight: video.isBig ? '490px' : '280px',
-        transition: 'transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease',
-        border: isActive ? '1.5px solid var(--teal)' : '1px solid rgba(215, 228, 225, 0.8)',
-        boxShadow: isActive ? '0 20px 45px rgba(19, 185, 168, 0.22)' : '0 8px 24px rgba(8, 26, 39, 0.06)',
-        transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
+        border: '1px solid #d7e4e1',
+        borderRadius: '24px',
       }}
     >
-      {/* Video element - Plays ONLY when isActive is true */}
+      {/* Video element - Plays purely when hovered, no visual hover jumps */}
       <video
         ref={videoRef}
         src={video.src}
@@ -71,8 +65,6 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
         muted={isMuted}
         playsInline
         preload="metadata"
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
         style={{
           position: 'absolute',
           inset: 0,
@@ -82,53 +74,8 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
           objectPosition: objectPosition,
           display: 'block',
           borderRadius: '24px',
-          filter: isActive ? 'brightness(1)' : 'brightness(0.92)',
-          transition: 'filter 0.3s ease',
         }}
       />
-
-      {/* Floating Center Play Badge (Fades out when hovered/playing) */}
-      <div
-        className="vplay-overlay"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'grid',
-          placeItems: 'center',
-          background: isActive ? 'transparent' : 'rgba(7, 23, 35, 0.25)',
-          opacity: isActive ? 0 : 1,
-          transition: 'opacity 0.28s ease, background 0.28s ease',
-          pointerEvents: 'none',
-          zIndex: 2,
-        }}
-      >
-        <div
-          className="vplay-btn-circle"
-          style={{
-            width: video.isBig ? '64px' : '50px',
-            height: video.isBig ? '64px' : '50px',
-            borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.92)',
-            backdropFilter: 'blur(8px)',
-            display: 'grid',
-            placeItems: 'center',
-            color: 'var(--navy)',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.28)',
-            transform: isActive ? 'scale(0.8)' : 'scale(1)',
-            transition: 'transform 0.28s ease',
-          }}
-        >
-          <svg
-            width={video.isBig ? '22' : '18'}
-            height={video.isBig ? '22' : '18'}
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            style={{ marginLeft: '2px' }}
-          >
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-        </div>
-      </div>
 
       {/* Subtle bottom gradient to ensure text readability */}
       <div
@@ -151,35 +98,7 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
         style={{ zIndex: 3 }}
       >
         <div style={{ minWidth: 0, overflow: 'hidden' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <b>{video.title}</b>
-            {isPlaying && (
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  background: 'rgba(19, 185, 168, 0.15)',
-                  color: 'var(--teal)',
-                  fontSize: '9.5px',
-                  fontWeight: 800,
-                  textTransform: 'uppercase',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                }}
-              >
-                <span
-                  style={{
-                    width: '5px',
-                    height: '5px',
-                    borderRadius: '50%',
-                    background: 'var(--teal)',
-                  }}
-                />
-                Playing
-              </span>
-            )}
-          </div>
+          <b>{video.title}</b>
           <small>{video.role}</small>
         </div>
 
@@ -198,13 +117,7 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
             placeItems: 'center',
             borderRadius: '50%',
             flexShrink: 0,
-            transition: 'color 0.2s ease, transform 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.15)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)'
+            transition: 'color 0.2s ease',
           }}
         >
           {isMuted ? (
@@ -245,7 +158,7 @@ function VideoCard({ video, isActive, onMouseEnter, onMouseLeave, onClick }) {
 
 export default function VideosSection() {
   const { eyebrow, headline, videos } = videosData
-  // Only ONE video active at any time: either hovered by mouse, or tapped
+  // Only ONE video active at any time: hovered by mouse, or tapped
   const [activeVideoId, setActiveVideoId] = useState(null)
 
   return (

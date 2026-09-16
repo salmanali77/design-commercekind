@@ -56,7 +56,13 @@ export default function Header() {
     <header className={scrolled ? 'scrolled' : ''}>
       <div className="container">
         <div className="nav-brand">
-          <Link to="/" onClick={close}>
+          <Link
+            to="/"
+            onClick={() => {
+              close()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
             <img src={logo} alt="CommerceKind" />
             <span>Commerce<b>Kind</b></span>
           </Link>
