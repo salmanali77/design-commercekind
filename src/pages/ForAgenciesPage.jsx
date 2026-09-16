@@ -359,14 +359,21 @@ export default function ForAgenciesPage() {
         .for-agencies-page {
           background: #f7faf9;
           color: #0b1722;
+          padding-top: 74px;
         }
 
         .agency-hero {
           position: relative;
           background: #071723;
           color: #ffffff;
-          padding: 120px 24px 80px;
+          min-height: 480px;
+          padding: 60px 24px 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .agency-hero-glow {

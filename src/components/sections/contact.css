@@ -12,10 +12,16 @@
 .contact-page-hero {
   background: var(--navy, #071723);
   color: #fff;
-  padding: 85px 0 70px;
+  min-height: 480px;
+  padding: 60px 0 50px;
   position: relative;
   overflow: hidden;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .contact-page-hero::before {

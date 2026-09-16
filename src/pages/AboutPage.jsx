@@ -22,6 +22,11 @@ export default function AboutPage() {
       icon: "👻",
       title: "Agencies, Not Partners",
       desc: "Late reports after the fact, no advance planning, and excuses when targets are missed. We built CommerceKind to operate as your authentic in-house partner."
+    },
+    {
+      icon: "🎯",
+      title: "Zero True Accountability",
+      desc: "When results miss, typical agencies point fingers at Amazon fees or algorithm shifts. We take complete ownership of the bottom-line numbers."
     }
   ]
 
@@ -276,14 +281,21 @@ export default function AboutPage() {
         .about-page {
           background: #f7faf9;
           color: #0b1722;
+          padding-top: 74px;
         }
 
         .about-hero {
           position: relative;
           background: #071723;
           color: #ffffff;
-          padding: 120px 24px 80px;
+          min-height: 480px;
+          padding: 60px 24px 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .about-hero-glow {

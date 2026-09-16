@@ -30,9 +30,7 @@ export default function ServicePage({ forcedServiceId }) {
         <div className="service-hero-glow"></div>
         <div className="service-hero-glow-teal"></div>
         <div className="container relative z-10 text-center">
-          <div className="service-eyebrow">
-            CommerceKind Dedicated Service
-          </div>
+
           <h1 className="service-hero-title">
             {service.heroHeadline || service.title}{' '}
             {service.headlineHighlight && <span className="service-accent">{service.headlineHighlight}</span>}
@@ -186,14 +184,21 @@ export default function ServicePage({ forcedServiceId }) {
         .service-page-wrapper {
           background: #f7faf9;
           color: #0b1722;
+          padding-top: 74px;
         }
 
         .service-hero-section {
           position: relative;
           background: #071723;
           color: #fff;
-          padding: 120px 24px 80px;
+          min-height: 480px;
+          padding: 60px 24px 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .service-hero-glow {

@@ -75,9 +75,16 @@ export default function Header() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <a href="#services" className="services-nav-link" onClick={() => setServicesOpen(v => !v)}>
+            <Link
+              to="/services/amazon-ppc-management"
+              className={`services-nav-link ${location.pathname.startsWith('/services') || servicesList.some(s => location.pathname === '/' + s.id) ? 'active-link' : ''}`}
+              onClick={() => setServicesOpen(v => !v)}
+            >
               Services
-            </a>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '4px', display: 'inline-block' }}>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </Link>
 
             <div
               className="services-mega-menu"
@@ -91,7 +98,7 @@ export default function Header() {
                       <Link
                         key={s.id}
                         to={`/services/${s.id}`}
-                        className="services-mega-item"
+                        className={`services-mega-item ${location.pathname === `/services/${s.id}` || location.pathname === `/${s.id}` ? 'active' : ''}`}
                         onClick={close}
                       >
                         {s.title}
@@ -103,7 +110,7 @@ export default function Header() {
                       <Link
                         key={s.id}
                         to={`/services/${s.id}`}
-                        className="services-mega-item"
+                        className={`services-mega-item ${location.pathname === `/services/${s.id}` || location.pathname === `/${s.id}` ? 'active' : ''}`}
                         onClick={close}
                       >
                         {s.title}
@@ -115,10 +122,34 @@ export default function Header() {
             </div>
           </div>
 
-          <Link to="/for-agencies" onClick={close}>For Agencies</Link>
-          <Link to="/results" onClick={close}>Results</Link>
-          <Link to="/about" onClick={close}>About</Link>
-          <Link to="/contact" onClick={close}>Contact</Link>
+          <Link 
+            to="/for-agencies" 
+            className={location.pathname === '/for-agencies' ? 'active-link' : ''}
+            onClick={close}
+          >
+            For Agencies
+          </Link>
+          <Link 
+            to="/results" 
+            className={location.pathname === '/results' ? 'active-link' : ''}
+            onClick={close}
+          >
+            Results
+          </Link>
+          <Link 
+            to="/about" 
+            className={location.pathname === '/about' ? 'active-link' : ''}
+            onClick={close}
+          >
+            About
+          </Link>
+          <Link 
+            to="/contact" 
+            className={location.pathname === '/contact' ? 'active-link' : ''}
+            onClick={close}
+          >
+            Contact
+          </Link>
         </nav>
 
         <div className="nav-right">
@@ -178,10 +209,10 @@ export default function Header() {
               ))}
             </div>
           )}
-          <Link to="/for-agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</Link>
-          <Link to="/results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</Link>
-          <Link to="/about" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</Link>
-          <Link to="/contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</Link>
+          <Link to="/for-agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 650, color: location.pathname === '/for-agencies' ? 'var(--teal)' : '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</Link>
+          <Link to="/results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 650, color: location.pathname === '/results' ? 'var(--teal)' : '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</Link>
+          <Link to="/about" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 650, color: location.pathname === '/about' ? 'var(--teal)' : '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</Link>
+          <Link to="/contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 650, color: location.pathname === '/contact' ? 'var(--teal)' : '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</Link>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '28px' }}>
             <Link className="btn-outline" to="/contact" onClick={close} style={{ textAlign: 'center', padding: '12px' }}>Book a Call</Link>

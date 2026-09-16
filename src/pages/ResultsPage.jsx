@@ -303,6 +303,17 @@ export default function ResultsPage() {
                 <span>Brand Partner · United States</span>
               </div>
             </div>
+
+            <div className="review-card">
+              <div className="review-stars">★★★★★</div>
+              <p>
+                "Their weekly optimization cadence is unlike any other partner we've worked with. Constant negative keyword pruning and SKU margin defense saved our Q4. Truly exceptional execution."
+              </p>
+              <div className="review-author">
+                <strong>David Miller</strong>
+                <span>Health & Wellness Brand · United States</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -326,14 +337,21 @@ export default function ResultsPage() {
         .results-page {
           background: #f7faf9;
           color: #0b1722;
+          padding-top: 74px;
         }
 
         .results-hero {
           position: relative;
           background: #071723;
           color: #ffffff;
-          padding: 120px 24px 80px;
+          min-height: 480px;
+          padding: 60px 24px 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .results-hero-glow {

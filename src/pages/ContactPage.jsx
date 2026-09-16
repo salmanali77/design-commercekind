@@ -13,9 +13,9 @@ export default function ContactPage() {
       {/* Dark Page Hero */}
       <section className="contact-page-hero">
         <div className="container">
-          <div className="eyebrow" style={{ color: 'var(--teal)' }}>
+          {/* <div className="eyebrow" style={{ color: 'var(--teal)' }}>
             Let's Talk
-          </div>
+          </div> */}
           <h1>Book a Free Strategy Call.</h1>
           <p className="contact-hero-sub">
             Tell us about your Amazon business and what you're looking for. We'll review your account before the call

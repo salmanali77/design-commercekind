@@ -15,7 +15,7 @@ export default function TermsPage() {
             Legal
           </div>
           <h1>Terms of Service</h1>
-          <p className="legal-date">Last updated: March 2026</p>
+          <p className="legal-date">Last updated:  2026</p>
         </div>
       </section>
 
