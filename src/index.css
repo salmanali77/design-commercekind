@@ -1846,3 +1846,121 @@ header .nav-right .btn-solid:hover {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   Legal Pages (Privacy Policy & Terms of Service)
+   ========================================================================== */
+
+.legal-page-wrapper {
+  min-height: 100vh;
+  background: var(--paper, #f7faf9);
+  padding-top: 74px;
+}
+
+.legal-hero {
+  background: var(--navy, #071723);
+  color: #fff;
+  padding: 85px 0 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.legal-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(19, 185, 168, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.legal-hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 850;
+  color: #fff;
+  margin: 0 auto 12px;
+  letter-spacing: -0.03em;
+}
+
+.legal-date {
+  font-size: 14px;
+  color: #9fb2ba;
+  margin: 0;
+}
+
+.legal-content-section {
+  padding: 70px 0 100px;
+  background: #ffffff;
+}
+
+.legal-body {
+  max-width: 780px !important;
+  margin: 0 auto;
+  color: #334155;
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.legal-body h2 {
+  font-size: 22px;
+  font-weight: 850;
+  color: var(--navy, #071723);
+  margin-top: 40px;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.legal-body h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-body p {
+  margin-bottom: 18px;
+  color: #475569;
+}
+
+.legal-body ul {
+  margin: 0 0 24px 20px;
+  padding: 0;
+  color: #475569;
+}
+
+.legal-body ul li {
+  margin-bottom: 8px;
+  line-height: 1.65;
+}
+
+.legal-body a {
+  color: var(--teal, #13b9a8);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.legal-bottom-actions {
+  margin-top: 55px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line, #dfe8e6);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legal-bottom-actions .btn-ghost {
+  border: 1.5px solid #dde2ef;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--navy, #071723);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.legal-bottom-actions .btn-ghost:hover {
+  border-color: var(--teal, #13b9a8);
+  color: var(--teal, #13b9a8);
+}

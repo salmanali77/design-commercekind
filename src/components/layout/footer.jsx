@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { footerData } from '../../data/footerData'
 
 const LinkedInIcon = () => (
@@ -47,7 +48,13 @@ export default function Footer() {
 
         <div className="right-links">
           {links.map((link, i) => (
-            <a key={i} href={link.href}>{link.label}</a>
+            <Link
+              key={i}
+              to={link.href}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
       </div>
