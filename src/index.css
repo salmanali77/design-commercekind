@@ -1287,25 +1287,45 @@ footer {
   }
 }
 
-/* Additional Custom CSS */
 header {
   height: 74px;
-  background: rgba(255, 255, 255, 0.98) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 9999;
-  border-bottom: 1px solid rgba(11, 23, 34, .08) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-  transition: all 0.25s ease;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 header.scrolled {
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(11, 23, 34, .08) !important;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* High contrast on dark hero sections when navbar background is transparent */
+header.on-dark-hero:not(.scrolled) .nav-brand span {
+  color: #ffffff !important;
+}
+
+header.on-dark-hero:not(.scrolled) .nav-center a {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+header.on-dark-hero:not(.scrolled) .nav-center a:hover,
+header.on-dark-hero:not(.scrolled) .nav-center a.active-link {
+  color: var(--teal) !important;
+}
+
+header.on-dark-hero:not(.scrolled) .mobile-hamburger svg {
+  stroke: #ffffff !important;
 }
 
 header .container {
