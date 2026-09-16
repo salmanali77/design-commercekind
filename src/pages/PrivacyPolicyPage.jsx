@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function PrivacyPolicyPage() {
   useEffect(() => {
@@ -16,7 +15,7 @@ export default function PrivacyPolicyPage() {
             Legal
           </div>
           <h1>Privacy Policy</h1>
-          <p className="legal-date">Last updated: March 2026</p>
+          <p className="legal-date">Last updated:  2026</p>
         </div>
       </section>
 
@@ -125,19 +124,6 @@ export default function PrivacyPolicyPage() {
             <li>Headquarters: Jacksonville, Florida, USA</li>
             <li>Operations: Lahore, Pakistan</li>
           </ul>
-
-          <div className="legal-bottom-actions">
-            <Link to="/" className="btn btn-ghost" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              &larr; Back to Home
-            </Link>
-            <Link
-              to="/terms"
-              className="btn btn-ghost"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              Terms of Service &rarr;
-            </Link>
-          </div>
         </div>
       </section>
     </div>

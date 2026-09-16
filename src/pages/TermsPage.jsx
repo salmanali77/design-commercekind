@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function TermsPage() {
   useEffect(() => {
@@ -126,19 +125,6 @@ export default function TermsPage() {
             <li>Headquarters: Jacksonville, Florida, USA</li>
             <li>Operations: Lahore, Pakistan</li>
           </ul>
-
-          <div className="legal-bottom-actions">
-            <Link to="/" className="btn btn-ghost" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              &larr; Back to Home
-            </Link>
-            <Link
-              to="/privacy-policy"
-              className="btn btn-ghost"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              Privacy Policy &rarr;
-            </Link>
-          </div>
         </div>
       </section>
     </div>
