@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react'
 import { heroData } from '../../data/heroData'
 
 const BadgeIcon = ({ type }) => {
@@ -60,9 +61,31 @@ const BadgeIcon = ({ type }) => {
 
 export default function HeroSection() {
   const { eyebrow, headline, headlineHighlight, subtext, primaryBtn, secondaryBtn, badges, dots } = heroData
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = useCallback((e) => {
+    const { clientX, clientY, currentTarget } = e
+    const rect = currentTarget.getBoundingClientRect()
+    // Subtle relative movement from center (-0.5 to 0.5)
+    const relX = (clientX - rect.left) / rect.width - 0.5
+    const relY = (clientY - rect.top) / rect.height - 0.5
+    // Bilkul minor parallax movement (~18px max)
+    setMousePos({
+      x: +(relX * 22).toFixed(1),
+      y: +(relY * 22).toFixed(1),
+    })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    setMousePos({ x: 0, y: 0 })
+  }, [])
 
   return (
-    <section className="hero">
+    <section 
+      className="hero"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="hero-glow"></div>
       <div className="hero-glow-purple"></div>
 
@@ -77,8 +100,14 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Rotating SVG Background */}
-      <div className="mark-bg">
+      {/* Rotating SVG Background Bars with subtle mouse parallax */}
+      <div 
+        className="mark-bg"
+        style={{
+          transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
+          transition: 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
+        }}
+      >
         <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" strokeWidth=".55">
           <rect x="160" y="160" width="80" height="80" transform="rotate(45 200 200)" />
           <rect x="120" y="120" width="160" height="160" transform="rotate(45 200 200)" />
