@@ -115,10 +115,10 @@ export default function Header() {
             </div>
           </div>
 
-          <a href="/#agencies">For Agencies</a>
-          <a href="/#results">Results</a>
-          <a href="/#team">About</a>
-          <Link to="/contact">Contact</Link>
+          <Link to="/for-agencies" onClick={close}>For Agencies</Link>
+          <Link to="/results" onClick={close}>Results</Link>
+          <Link to="/about" onClick={close}>About</Link>
+          <Link to="/contact" onClick={close}>Contact</Link>
         </nav>
 
         <div className="nav-right">
@@ -178,9 +178,9 @@ export default function Header() {
               ))}
             </div>
           )}
-          <a href="/#agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</a>
-          <a href="/#results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</a>
-          <a href="/#team" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</a>
+          <Link to="/for-agencies" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>For Agencies</Link>
+          <Link to="/results" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Results</Link>
+          <Link to="/about" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>About</Link>
           <Link to="/contact" onClick={close} style={{ display: 'block', padding: '12px 0', fontSize: '17px', fontWeight: 600, color: '#0b1722', borderBottom: '1px solid #f3f4f6', textDecoration: 'none' }}>Contact</Link>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '28px' }}>

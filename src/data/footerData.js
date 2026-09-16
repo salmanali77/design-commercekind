@@ -5,6 +5,10 @@ export const footerData = {
     { label: 'Facebook', href: 'https://www.facebook.com/CommercekindLLC/', icon: 'facebook' },
   ],
   links: [
+    { label: 'About', href: '/about' },
+    { label: 'Results', href: '/results' },
+    { label: 'For Agencies', href: '/for-agencies' },
+    { label: 'Contact', href: '/contact' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Terms of Service', href: '/terms' },
   ],
